@@ -2,6 +2,7 @@ package provider
 
 import (
 	"context"
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -399,7 +400,7 @@ func resourcePortProfileUpdate(ctx context.Context, d *schema.ResourceData, meta
 
 	resp, err := c.c.UpdatePortProfile(ctx, site, req)
 	if err != nil {
-		return diag.FromErr(err)
+		return diag.FromErr(improveError(err))
 	}
 
 	return resourcePortProfileSetResourceData(resp, d, site)
